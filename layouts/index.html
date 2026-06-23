@@ -1,0 +1,96 @@
+{{ define "main" }}
+{{ $recentPubs := first 3 (where .Site.RegularPages "Section" "publications").ByDate.Reverse }}
+{{ $projects := where .Site.RegularPages "Section" "projects" }}
+{{ $photo := .Site.Params.photo | default "/img/profile-placeholder.svg" }}
+
+<div class="home">
+
+  {{/* ── Hero ─────────────────────────────────────────────────────────── */}}
+  <section class="home-hero" aria-labelledby="hero-name">
+
+    <div class="home-hero__content">
+      <h1 class="home-hero__name" id="hero-name">{{ .Site.Title }}</h1>
+      <p class="home-hero__institution">{{ .Site.Params.institution }}</p>
+
+      <div class="home-hero__bio">
+        {{ .Content }}
+      </div>
+
+      <nav class="home-hero__links" aria-label="Profiles">
+        {{- with .Site.Params.email }}
+        <a href="mailto:{{ . }}">Email</a>
+        {{- end }}
+        {{- with .Site.Params.orcid }}
+        <a href="https://orcid.org/{{ . }}" rel="noopener">ORCID</a>
+        {{- end }}
+        {{- with .Site.Params.profileURL }}
+        <a href="{{ . }}" rel="noopener">University profile</a>
+        {{- end }}
+        <a href="{{ "/cv/" | relURL }}">CV</a>
+      </nav>
+    </div>
+
+    <div class="home-hero__photo-wrap">
+      <img
+        class="home-hero__photo"
+        src="{{ $photo | relURL }}"
+        alt="{{ .Site.Params.author }}"
+        width="400"
+        height="500"
+      />
+    </div>
+
+  </section>
+
+  {{/* ── Projects ─────────────────────────────────────────────────────── */}}
+  {{- if $projects }}
+  <section class="home-projects" aria-labelledby="projects-heading">
+    <h2 class="home-featured__heading" id="projects-heading">Selected projects</h2>
+
+    <ul class="home-projects__grid" role="list">
+      {{- range first 2 ($projects.ByParam "weight") }}
+      <li class="home-project-card">
+        <div class="home-project-card__header">
+          <a class="home-project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
+          {{- with .Params.status }}
+          <span class="status-badge status-badge--{{ . }}">{{ . }}</span>
+          {{- end }}
+        </div>
+        <p class="home-project-card__desc">{{ .Params.description }}</p>
+      </li>
+      {{- end }}
+    </ul>
+
+    <a class="home-featured__all" href="{{ "/research/" | relURL }}">
+      All projects →
+    </a>
+  </section>
+  {{- end }}
+
+  {{/* ── Selected publications ───────────────────────────────────────── */}}
+  {{- if $recentPubs }}
+  <section class="home-featured" aria-labelledby="featured-heading">
+    <h2 class="home-featured__heading" id="featured-heading">Recent publications</h2>
+
+    <ul class="pub-cards" role="list">
+      {{- range $recentPubs }}
+      <li class="pub-card">
+        <span class="pub-card__meta">
+          {{- with .Params.venue }}{{ . }} · {{ end }}{{ .Date.Format "2006" }}
+        </span>
+        <a class="pub-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- with .Params.highlight }}
+        <p class="pub-card__highlight">{{ . }}</p>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+
+    <a class="home-featured__all" href="{{ "/publications/" | relURL }}">
+      All publications →
+    </a>
+  </section>
+  {{- end }}
+
+</div>
+{{ end }}

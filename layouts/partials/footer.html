@@ -1,0 +1,17 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <p class="site-footer__copy">
+      &copy; {{ now.Year }} {{ .Site.Params.author | default .Site.Title }}
+    </p>
+
+    {{- with .Site.Menus.footer }}
+    <nav class="site-footer__nav" aria-label="Legal">
+      <ul role="list">
+        {{- range . }}
+        <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{- end }}
+  </div>
+</footer>

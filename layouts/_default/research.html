@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{ $projects := where .Site.RegularPages "Section" "projects" }}
+
+<div class="research">
+
+  {{/* ── Mission + cover ──────────────────────────────────────────────── */}}
+  <section class="research-hero">
+    <div class="research-hero__content">
+      <h1>{{ .Title }}</h1>
+      {{- with .Params.mission }}
+      <p class="research-hero__mission">{{ . }}</p>
+      {{- end }}
+    </div>
+    <div class="research-hero__art">
+      <img
+        class="research-cover"
+        src="{{ "/img/computational_psychiatry_icon-web.png" | relURL }}"
+        alt="A human head and brain merging into a computer screen showing data curves, gears, and a molecule"
+        width="900"
+        height="491"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  {{/* ── Approach (three pillars) ─────────────────────────────────────── */}}
+  {{- with .Params.pillars }}
+  <section class="research-pillars" aria-labelledby="ra-heading">
+    <h2 class="section-heading" id="ra-heading">Approach</h2>
+    <ol class="pillars" role="list">
+      {{- range $i, $p := . }}
+      <li class="pillar">
+        <span class="pillar__num" aria-hidden="true">{{ printf "%02d" (add $i 1) }}</span>
+        <h3 class="pillar__title">{{ $p.title }}</h3>
+        <p class="pillar__text">{{ $p.text }}</p>
+      </li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
+
+  {{/* ── Projects ─────────────────────────────────────────────────────── */}}
+  {{- if $projects }}
+  <section class="research-projects" aria-labelledby="rp-heading">
+    <h2 class="section-heading" id="rp-heading">Projects</h2>
+    <ul class="project-grid" role="list">
+      {{- range $projects.ByParam "weight" }}
+      {{ partial "project-card.html" . }}
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+</div>
+{{ end }}

@@ -1,0 +1,29 @@
+{{ define "main" }}
+<article class="pub-single prose">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+
+    <div class="pub-single__meta">
+      {{- if not .Date.IsZero }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+      {{- end }}
+
+      {{- with .Params.tags }}
+      <ul class="pub-entry__tags" role="list" aria-label="Topics">
+        {{- range . }}
+        <li class="tag-chip">{{ . }}</li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+  </header>
+
+  <div class="content pub-single__content">
+    {{ .Content }}
+  </div>
+
+  <footer class="pub-single__footer">
+    <a class="back-link" href="{{ "/publications/" | relURL }}">&larr; All publications</a>
+  </footer>
+</article>
+{{ end }}

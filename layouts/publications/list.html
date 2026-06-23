@@ -1,0 +1,31 @@
+{{ define "main" }}
+<section class="publications-list">
+  <header class="page-header">
+    <h1>Publications</h1>
+  </header>
+
+  {{/* Group by year, newest first */}}
+  {{ range (.Pages.GroupByDate "2006") }}
+  <div class="pub-year-group">
+    <h2 class="pub-year-label">{{ .Key }}</h2>
+    <ul class="pub-list" role="list">
+      {{- range .Pages.ByDate.Reverse }}
+      <li class="pub-entry{{ if .Params.featured }} pub-entry--featured{{ end }}">
+        <a class="pub-entry__title" href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- with .Params.venue }}
+        <span class="pub-entry__venue">{{ . }}</span>
+        {{- end }}
+        {{- with .Params.tags }}
+        <ul class="pub-entry__tags" role="list" aria-label="Topics">
+          {{- range . }}
+          <li class="tag-chip">{{ . }}</li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+  {{ end }}
+</section>
+{{ end }}

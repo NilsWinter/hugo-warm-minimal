@@ -1,0 +1,9 @@
+name = "Warm Minimal"
+license = "MIT"
+licenselink = ""
+description = "Warm, minimal, elegant theme for academic and research websites"
+homepage = ""
+min_version = "0.120.0"
+
+[author]
+  name = "Nils Winter"

@@ -1,0 +1,19 @@
+{{ define "main" }}
+{{/*
+  Card grid layout — placeholder until project cards are defined.
+  Expected front matter per card: title, description, url, tags, image (optional).
+  TODO: render .Params.cards as a CSS grid once content is populated.
+*/}}
+<section class="card-grid-page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="page-description">{{ . }}</p>{{- end }}
+  </header>
+
+  {{- if .Content }}
+  <div class="content">{{ .Content }}</div>
+  {{- end }}
+
+  {{/* Card grid goes here */}}
+</section>
+{{ end }}

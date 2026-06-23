@@ -1,0 +1,72 @@
+{{ define "main" }}
+<article class="cv">
+
+  {{/* ── Header ───────────────────────────────────────────────────────── */}}
+  <header class="cv-header">
+    <div class="cv-header__main">
+      <h1 class="cv-header__name">{{ .Params.name | default .Title }}</h1>
+      {{- with .Params.affiliation }}
+      <p class="cv-header__affil">
+        {{- range $i, $line := . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end -}}
+      </p>
+      {{- end }}
+    </div>
+
+    <div class="cv-header__contact">
+      {{- with .Params.email }}
+      <a class="cv-chip cv-chip--accent" href="mailto:{{ . }}">✉ {{ . }}</a>
+      {{- end }}
+      {{- with .Params.phone }}
+      <span class="cv-contact__phone">{{ . }}</span>
+      {{- end }}
+      {{- with .Params.profiles }}
+      <div class="cv-header__links">
+        {{- range . }}
+        <a class="cv-chip" href="{{ .url }}" rel="noopener" target="_blank">{{ .label }} ↗</a>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+  </header>
+
+  {{/* ── Timeline sections ────────────────────────────────────────────── */}}
+  {{- range .Params.sections }}
+  <section class="cv-section">
+    <div class="cv-section__heading">
+      {{ partial "cv-icon.html" .icon }}
+      <h2>{{ .heading }}</h2>
+    </div>
+    <ol class="cv-timeline" role="list">
+      {{- range .entries }}
+      <li class="cv-entry">
+        <div class="cv-entry__date">{{ .date }}</div>
+        <div class="cv-entry__body">
+          <h3 class="cv-entry__title">{{ .title }}</h3>
+          {{- with .detail }}<p class="cv-entry__detail">{{ . }}</p>{{ end }}
+        </div>
+      </li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
+
+  {{/* ── Awards ───────────────────────────────────────────────────────── */}}
+  {{- with .Params.awards }}
+  <section class="cv-section">
+    <div class="cv-section__heading">
+      {{ partial "cv-icon.html" "award" }}
+      <h2>Awards, Scholarships &amp; Grants</h2>
+    </div>
+    <ul class="cv-awards" role="list">
+      {{- range . }}
+      <li class="cv-award">
+        <span class="cv-award__year">{{ .year }}</span>
+        <span class="cv-award__text">{{ .title }}{{ with .detail }} · <span class="cv-award__detail">{{ . }}</span>{{ end }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+</article>
+{{ end }}

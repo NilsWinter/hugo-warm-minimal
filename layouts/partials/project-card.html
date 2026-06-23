@@ -1,0 +1,35 @@
+{{- /* Full project card. Context (.) is a project page. */ -}}
+<li class="project-card">
+  <div class="project-card__top">
+    {{- with .Params.icon }}
+    <span class="project-card__icon">{{ partial "project-icon.html" . }}</span>
+    {{- end }}
+    <div class="project-card__header">
+      <a class="project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
+      {{- with .Params.status }}
+      <span class="status-badge status-badge--{{ . }}">{{ . }}</span>
+      {{- end }}
+    </div>
+    <p class="project-card__desc">{{ .Params.description }}</p>
+    {{- with .Params.tags }}
+    <ul class="pub-entry__tags" role="list">
+      {{- range . }}<li class="tag-chip">{{ . }}</li>{{- end }}
+    </ul>
+    {{- end }}
+  </div>
+
+  <div class="project-card__links">
+    {{- with .Params.github }}
+    <a href="{{ . }}" class="project-card__link" rel="noopener" target="_blank">GitHub ↗</a>
+    {{- end }}
+    {{- with .Params.docs }}
+    <a href="{{ . }}" class="project-card__link" rel="noopener" target="_blank">Docs ↗</a>
+    {{- end }}
+    {{- with .Params.website }}
+    <a href="{{ . }}" class="project-card__link" rel="noopener" target="_blank">Website ↗</a>
+    {{- end }}
+    {{- with .Params.paper }}
+    <a href="{{ . | relURL }}" class="project-card__link">Paper</a>
+    {{- end }}
+  </div>
+</li>
