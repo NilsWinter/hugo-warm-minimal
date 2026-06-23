@@ -29,6 +29,12 @@
     </div>
   </header>
 
+  {{- with .Params.image }}
+  <figure class="viz-figure">
+    <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default (printf "%s example output" $.Title) }}" loading="lazy" />
+  </figure>
+  {{- end }}
+
   <div class="content">
     {{ .Content }}
   </div>
