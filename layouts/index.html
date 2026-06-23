@@ -1,7 +1,15 @@
 {{ define "main" }}
 {{ $recentPubs := first 3 (where .Site.RegularPages "Section" "publications").ByDate.Reverse }}
-{{ $software := where .Site.RegularPages "Section" "software" }}
 {{ $photo := .Site.Params.photo | default "/img/profile-placeholder.svg" }}
+
+{{/* One example per category: software, visualization, research (first by weight) */}}
+{{ $software := where .Site.RegularPages "Section" "software" }}
+{{ $viz := where .Site.RegularPages "Section" "visualizations" }}
+{{ $research := where .Site.RegularPages "Section" "projects" }}
+{{ $featured := slice }}
+{{ with $software }}{{ $featured = $featured | append (index (.ByParam "weight") 0) }}{{ end }}
+{{ with $viz }}{{ $featured = $featured | append (index (.ByParam "weight") 0) }}{{ end }}
+{{ with $research }}{{ $featured = $featured | append (index (.ByParam "weight") 0) }}{{ end }}
 
 <div class="home">
 
@@ -42,28 +50,16 @@
 
   </section>
 
-  {{/* ── Software ─────────────────────────────────────────────────────── */}}
-  {{- if $software }}
-  <section class="home-projects" aria-labelledby="software-heading">
-    <h2 class="home-featured__heading" id="software-heading">Software</h2>
+  {{/* ── Selected work (one per category) ─────────────────────────────── */}}
+  {{- if $featured }}
+  <section class="home-projects" aria-labelledby="work-heading">
+    <h2 class="home-featured__heading" id="work-heading">Selected work</h2>
 
     <ul class="home-projects__grid" role="list">
-      {{- range first 2 ($software.ByParam "weight") }}
-      <li class="home-project-card">
-        <div class="home-project-card__header">
-          <a class="home-project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
-          {{- with .Params.status }}
-          <span class="status-badge status-badge--{{ . }}">{{ . }}</span>
-          {{- end }}
-        </div>
-        <p class="home-project-card__desc">{{ .Params.description }}</p>
-      </li>
+      {{- range $featured }}
+      {{ partial "project-card.html" . }}
       {{- end }}
     </ul>
-
-    <a class="home-featured__all" href="{{ "/software/" | relURL }}">
-      All software →
-    </a>
   </section>
   {{- end }}
 

@@ -616,10 +616,10 @@ hr {
 .home-projects__grid {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--space-6);
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
 }
 
 .home-project-card {
