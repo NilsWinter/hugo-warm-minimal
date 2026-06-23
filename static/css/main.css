@@ -315,6 +315,20 @@ hr {
   color: var(--color-text);
 }
 
+/* Stack the header on narrow screens so the logo + nav fit */
+@media (max-width: 640px) {
+  .site-header__inner {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .site-nav__list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-4);
+  }
+}
+
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--color-border);
@@ -615,6 +629,7 @@ hr {
 .list-page {
   max-width: var(--max-width-content);
   margin-inline: auto;
+  padding-inline: var(--space-6);
 }
 
 .item-list {
@@ -650,6 +665,7 @@ hr {
 .prose {
   max-width: var(--max-width-content);
   margin-inline: auto;
+  padding-inline: var(--space-6);
 }
 
 /* Prose markdown content — scoped to .content to avoid bleeding */
@@ -665,6 +681,7 @@ hr {
 .publications-list {
   max-width: var(--max-width-content);
   margin-inline: auto;
+  padding-inline: var(--space-6);
 }
 
 .pub-year-group {
@@ -1073,6 +1090,7 @@ hr {
 .cv {
   max-width: 46rem;
   margin-inline: auto;
+  padding-inline: var(--space-6);
 }
 
 .cv-header {
