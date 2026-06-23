@@ -315,17 +315,54 @@ hr {
   color: var(--color-text);
 }
 
-/* Stack the header on narrow screens so the logo + nav fit */
+/* Mobile nav toggle (hamburger) — hidden on desktop and when JS is off */
+.site-nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.site-nav__toggle:hover { color: var(--color-accent); }
+
+.site-nav__toggle svg { display: block; width: 24px; height: 24px; }
+
+.site-nav__toggle .icon-close { display: none; }
+.site-nav__toggle[aria-expanded="true"] .icon-menu { display: none; }
+.site-nav__toggle[aria-expanded="true"] .icon-close { display: block; }
+
 @media (max-width: 640px) {
   .site-header__inner {
-    flex-direction: column;
-    gap: var(--space-3);
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-4);
   }
 
+  /* Show the toggle only when JS can drive it */
+  .js .site-nav__toggle { display: inline-flex; }
+
+  /* With JS: collapse the nav behind the toggle until opened */
+  .js .site-nav {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .js .site-nav.is-open { display: block; }
+
+  /* Vertical link list — used by the open menu and the no-JS fallback */
   .site-nav__list {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-2) var(--space-4);
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+  }
+
+  .site-nav__link {
+    display: block;
+    padding-block: var(--space-2);
+    font-size: var(--text-base);
   }
 }
 
