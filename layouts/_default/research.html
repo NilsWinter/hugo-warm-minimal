@@ -1,6 +1,4 @@
 {{ define "main" }}
-{{ $projects := where .Site.RegularPages "Section" "projects" }}
-
 <div class="research">
 
   {{/* ── Mission + cover ──────────────────────────────────────────────── */}}
@@ -36,18 +34,6 @@
       </li>
       {{- end }}
     </ol>
-  </section>
-  {{- end }}
-
-  {{/* ── Projects ─────────────────────────────────────────────────────── */}}
-  {{- if $projects }}
-  <section class="research-projects" aria-labelledby="rp-heading">
-    <h2 class="section-heading" id="rp-heading">Projects</h2>
-    <ul class="project-grid" role="list">
-      {{- range $projects.ByParam "weight" }}
-      {{ partial "project-card.html" . }}
-      {{- end }}
-    </ul>
   </section>
   {{- end }}
 

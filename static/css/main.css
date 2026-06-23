@@ -78,6 +78,17 @@
   --color-accent-light: #D4E4D4;
   */
 
+  /* Category accents — software / visualization / research (bar + icon + tag) */
+  --cat-software:           #B85C38;
+  --cat-software-soft:      #F0D5C8;
+  --cat-software-text:      #974427;
+  --cat-visualization:      #5C7A5C;
+  --cat-visualization-soft: #DBE6D5;
+  --cat-visualization-text: #3F5A3C;
+  --cat-research:           #4F7088;
+  --cat-research-soft:      #D9E3EC;
+  --cat-research-text:      #36506A;
+
   /* Typography */
   --font-heading: "Newsreader", Georgia, serif;
   --font-body:    "Inter", system-ui, sans-serif;
@@ -876,6 +887,17 @@ hr {
   gap: var(--space-3);
 }
 
+/* Top row: icon (left) + category tag (right) */
+.project-card__toprow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.project-card__toprow .cat-tag {
+  margin-left: auto;
+}
+
 .project-card__icon {
   display: inline-flex;
   color: var(--color-accent);
@@ -890,6 +912,29 @@ hr {
 .project-icon circle {
   fill: var(--color-bg-subtle);
 }
+
+/* Colored category tag */
+.cat-tag {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cat-tag--software       { background: var(--cat-software-soft);      color: var(--cat-software-text); }
+.cat-tag--visualizations { background: var(--cat-visualization-soft); color: var(--cat-visualization-text); }
+.cat-tag--projects       { background: var(--cat-research-soft);      color: var(--cat-research-text); }
+
+/* Category color carries through the left bar and the icon */
+.project-card--software       { border-left-color: var(--cat-software); }
+.project-card--visualizations { border-left-color: var(--cat-visualization); }
+.project-card--projects       { border-left-color: var(--cat-research); }
+
+.project-card--software       .project-card__icon { color: var(--cat-software); }
+.project-card--visualizations .project-card__icon { color: var(--cat-visualization); }
+.project-card--projects       .project-card__icon { color: var(--cat-research); }
 
 .project-card__header {
   display: flex;

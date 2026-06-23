@@ -1,0 +1,40 @@
+{{ define "main" }}
+<article class="project-single prose">
+  <header class="page-header">
+    <div class="project-single__title-row">
+      <h1>{{ .Title }}</h1>
+      {{- with .Params.status }}
+      <span class="status-badge status-badge--{{ . }}">{{ . }}</span>
+      {{- end }}
+    </div>
+
+    <p class="project-single__desc">{{ .Params.description }}</p>
+
+    {{- with .Params.tags }}
+    <ul class="pub-entry__tags" role="list" style="margin-bottom: var(--space-6)">
+      {{- range . }}<li class="tag-chip">{{ . }}</li>{{- end }}
+    </ul>
+    {{- end }}
+
+    <div class="project-single__links">
+      {{- with .Params.app }}
+      <a href="{{ . }}" class="project-link-btn" rel="noopener" target="_blank">Open app ↗</a>
+      {{- end }}
+      {{- with .Params.github }}
+      <a href="{{ . }}" class="project-link-btn" rel="noopener" target="_blank">GitHub ↗</a>
+      {{- end }}
+      {{- with .Params.paper }}
+      <a href="{{ . | relURL }}" class="project-link-btn">Paper</a>
+      {{- end }}
+    </div>
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+
+  <footer class="pub-single__footer">
+    <a class="back-link" href="{{ "/visualizations/" | relURL }}">&larr; All visualizations</a>
+  </footer>
+</article>
+{{ end }}

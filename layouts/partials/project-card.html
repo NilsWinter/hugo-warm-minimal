@@ -1,9 +1,18 @@
-{{- /* Full project card. Context (.) is a project page. */ -}}
-<li class="project-card">
+{{- /* Full card for software / visualizations / projects (research).
+       Context (.) is a page; its section drives the colored category tag. */ -}}
+{{- $labels := dict "software" "Software" "visualizations" "Visualization" "projects" "Research" -}}
+{{- $cat := .Section -}}
+{{- $label := index $labels $cat -}}
+<li class="project-card project-card--{{ $cat }}">
   <div class="project-card__top">
-    {{- with .Params.icon }}
-    <span class="project-card__icon">{{ partial "project-icon.html" . }}</span>
-    {{- end }}
+    <div class="project-card__toprow">
+      {{- with .Params.icon }}
+      <span class="project-card__icon">{{ partial "project-icon.html" . }}</span>
+      {{- end }}
+      {{- with $label }}
+      <span class="cat-tag cat-tag--{{ $cat }}">{{ . }}</span>
+      {{- end }}
+    </div>
     <div class="project-card__header">
       <a class="project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
       {{- with .Params.status }}
@@ -18,7 +27,11 @@
     {{- end }}
   </div>
 
+  {{- if or .Params.app .Params.github .Params.docs .Params.website .Params.paper }}
   <div class="project-card__links">
+    {{- with .Params.app }}
+    <a href="{{ . }}" class="project-card__link" rel="noopener" target="_blank">Open app ↗</a>
+    {{- end }}
     {{- with .Params.github }}
     <a href="{{ . }}" class="project-card__link" rel="noopener" target="_blank">GitHub ↗</a>
     {{- end }}
@@ -32,4 +45,5 @@
     <a href="{{ . | relURL }}" class="project-card__link">Paper</a>
     {{- end }}
   </div>
+  {{- end }}
 </li>

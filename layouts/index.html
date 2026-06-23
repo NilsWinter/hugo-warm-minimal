@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ $recentPubs := first 3 (where .Site.RegularPages "Section" "publications").ByDate.Reverse }}
-{{ $projects := where .Site.RegularPages "Section" "projects" }}
+{{ $software := where .Site.RegularPages "Section" "software" }}
 {{ $photo := .Site.Params.photo | default "/img/profile-placeholder.svg" }}
 
 <div class="home">
@@ -42,13 +42,13 @@
 
   </section>
 
-  {{/* ── Projects ─────────────────────────────────────────────────────── */}}
-  {{- if $projects }}
-  <section class="home-projects" aria-labelledby="projects-heading">
-    <h2 class="home-featured__heading" id="projects-heading">Selected projects</h2>
+  {{/* ── Software ─────────────────────────────────────────────────────── */}}
+  {{- if $software }}
+  <section class="home-projects" aria-labelledby="software-heading">
+    <h2 class="home-featured__heading" id="software-heading">Software</h2>
 
     <ul class="home-projects__grid" role="list">
-      {{- range first 2 ($projects.ByParam "weight") }}
+      {{- range first 2 ($software.ByParam "weight") }}
       <li class="home-project-card">
         <div class="home-project-card__header">
           <a class="home-project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
@@ -61,8 +61,8 @@
       {{- end }}
     </ul>
 
-    <a class="home-featured__all" href="{{ "/research/" | relURL }}">
-      All projects →
+    <a class="home-featured__all" href="{{ "/software/" | relURL }}">
+      All software →
     </a>
   </section>
   {{- end }}
