@@ -17,6 +17,9 @@
   <section class="home-hero" aria-labelledby="hero-name">
 
     <div class="home-hero__content">
+      {{- if and .Site.Params.features.heroEyebrow .Params.eyebrow }}
+      <p class="home-hero__eyebrow">{{ .Params.eyebrow }}</p>
+      {{- end }}
       <h1 class="home-hero__name" id="hero-name">{{ .Site.Title }}</h1>
       <p class="home-hero__institution">{{ .Site.Params.institution }}</p>
 

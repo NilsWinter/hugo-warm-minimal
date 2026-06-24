@@ -1,5 +1,6 @@
 {{ define "main" }}
-<article class="project-single prose">
+<article class="project-single prose{{ if and .Site.Params.features.toc .Fragments.Headings }} prose--has-toc{{ end }}">
+  {{ partial "prose-toc.html" . }}
   <header class="page-header">
     <div class="project-single__title-row">
       <h1>{{ .Title }}</h1>

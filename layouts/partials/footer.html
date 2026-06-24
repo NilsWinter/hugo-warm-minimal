@@ -4,6 +4,27 @@
       &copy; {{ now.Year }} {{ .Site.Params.author | default .Site.Title }}
     </p>
 
+    {{- if .Site.Params.features.footerIcons }}
+    {{- with .Site.Params.social }}
+    {{- $items := slice
+        (dict "name" "email"        "label" "Email"        "url" (cond (and .email (not (hasPrefix .email "http"))) (printf "mailto:%s" .email) .email))
+        (dict "name" "orcid"        "label" "ORCID"        "url" .orcid)
+        (dict "name" "scholar"      "label" "Google Scholar" "url" .scholar)
+        (dict "name" "github"       "label" "GitHub"       "url" .github)
+        (dict "name" "researchgate" "label" "ResearchGate" "url" .researchgate) }}
+    <nav class="site-footer__social" aria-label="Profiles">
+      {{- range $items }}
+      {{- if .url }}
+      <a class="social-link" href="{{ .url }}" rel="noopener" target="_blank" aria-label="{{ .label }}" title="{{ .label }}">
+        {{ partial "social-icon.html" .name }}
+        <span class="sr-only">{{ .label }}</span>
+      </a>
+      {{- end }}
+      {{- end }}
+    </nav>
+    {{- end }}
+    {{- end }}
+
     {{- with .Site.Menus.footer }}
     <nav class="site-footer__nav" aria-label="Legal">
       <ul role="list">

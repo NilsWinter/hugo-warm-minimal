@@ -1,0 +1,17 @@
+{{- /* Emits the space-separated feature classes for <html>, driven by
+       [params.features] in the site config. Each enabled flag adds one
+       `f-*` class that the matching CSS rules in main.css are scoped under,
+       so disabling a flag makes its CSS inert with no markup left behind. */ -}}
+{{- $f := .Site.Params.features -}}
+{{- $c := slice -}}
+{{- if $f.darkMode }}{{ $c = $c | append "f-dark" }}{{ end -}}
+{{- if $f.linkUnderline }}{{ $c = $c | append "f-underline" }}{{ end -}}
+{{- if $f.focusRing }}{{ $c = $c | append "f-focus" }}{{ end -}}
+{{- if $f.reducedMotion }}{{ $c = $c | append "f-reduced-motion" }}{{ end -}}
+{{- if $f.printStyles }}{{ $c = $c | append "f-print" }}{{ end -}}
+{{- if $f.grain }}{{ $c = $c | append "f-grain" }}{{ end -}}
+{{- if $f.callouts }}{{ $c = $c | append "f-callouts" }}{{ end -}}
+{{- if $f.leadParagraph }}{{ $c = $c | append "f-lead" }}{{ end -}}
+{{- if $f.dropCap }}{{ $c = $c | append "f-dropcap" }}{{ end -}}
+{{- if $f.toc }}{{ $c = $c | append "f-toc" }}{{ end -}}
+{{- delimit $c " " -}}

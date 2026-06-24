@@ -1,8 +1,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{{/* Flag JS availability for progressive enhancement (e.g. mobile nav) */}}
-<script>document.documentElement.classList.add('js');</script>
+{{/* Flag JS availability for progressive enhancement (e.g. mobile nav).
+     Also apply a saved theme before paint to avoid a flash. Light is the
+     default; dark only when the reader has explicitly chosen it. */}}
+<script>
+  (function () {
+    document.documentElement.classList.add('js');
+    {{- if .Site.Params.features.darkMode }}
+    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+    {{- end }}
+  })();
+</script>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
 
 <title>

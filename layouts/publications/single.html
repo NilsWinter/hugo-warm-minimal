@@ -4,6 +4,10 @@
     <h1>{{ .Title }}</h1>
 
     <div class="pub-single__meta">
+      {{- if and .Site.Params.features.pubBadges .Params.venue }}
+      <span class="pub-venue-chip">{{ .Params.venue }}</span>
+      {{- end }}
+
       {{- if not .Date.IsZero }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
       {{- end }}
@@ -16,6 +20,8 @@
       </ul>
       {{- end }}
     </div>
+
+    {{- if .Site.Params.features.pubBadges }}{{ partial "pub-links.html" . }}{{ end }}
   </header>
 
   <div class="content pub-single__content">

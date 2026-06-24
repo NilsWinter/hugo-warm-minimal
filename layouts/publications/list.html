@@ -22,6 +22,7 @@
           {{- end }}
         </ul>
         {{- end }}
+        {{- if .Site.Params.features.pubBadges }}{{ partial "pub-links.html" . }}{{ end }}
       </li>
       {{- end }}
     </ul>

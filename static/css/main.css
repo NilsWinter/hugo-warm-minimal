@@ -189,9 +189,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
 }
 
-h1 { font-size: var(--text-4xl); letter-spacing: -0.02em; }
-h2 { font-size: var(--text-3xl); letter-spacing: -0.015em; }
-h3 { font-size: var(--text-2xl); letter-spacing: -0.01em; }
+h1 { font-size: var(--text-3xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-2xl); letter-spacing: -0.015em; }
+h3 { font-size: var(--text-xl); letter-spacing: -0.01em; }
 h4 { font-size: var(--text-xl); }
 h5 { font-size: var(--text-lg); }
 h6 { font-size: var(--text-base); }
@@ -721,8 +721,8 @@ hr {
   margin-top: var(--space-4);
 }
 
-.content h2 { margin-top: var(--space-12); }
-.content h3 { margin-top: var(--space-8); }
+.content h2 { margin-top: var(--space-12); scroll-margin-top: var(--space-8); }
+.content h3 { margin-top: var(--space-8); scroll-margin-top: var(--space-8); }
 
 
 /* Publications */
@@ -1449,3 +1449,407 @@ hr {
 
 .text-muted { color: var(--color-text-muted); }
 .text-accent { color: var(--color-accent); }
+
+
+/* =============================================================================
+   9. MODULAR DESIGN FEATURES
+   Every block below is scoped under an html.f-* class emitted by
+   partials/feature-classes.html, which reads [params.features] in hugo.toml.
+   Turn a flag off → the class is absent → these rules go inert (and the
+   matching markup, where any, is also skipped by the template).
+   ============================================================================= */
+
+/* -- Publication titles are long sentences; keep them calm (always on) ------- */
+.pub-single .page-header h1 { font-size: var(--text-2xl); }
+
+
+/* -- Hero eyebrow (features.heroEyebrow) ------------------------------------ */
+.home-hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-3);
+}
+
+
+/* -- Footer social icons (features.footerIcons) ----------------------------- */
+.site-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  order: 1;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  transition: color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+.social-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.social-link svg { width: 17px; height: 17px; }
+
+.social-link__text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+
+/* -- Publication badges (features.pubBadges) -------------------------------- */
+.pub-venue-chip {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--cat-research-soft);
+  color: var(--cat-research-text);
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+}
+
+.pub-entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-1) 0 0;
+}
+
+.pub-link {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.pub-link:hover { color: var(--color-accent); }
+
+
+/* -- Lead paragraph (features.leadParagraph) -------------------------------- */
+html.f-lead .content:not(.pub-single__content) > p:first-of-type {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+
+/* -- Drop cap (features.dropCap) -------------------------------------------- */
+html.f-dropcap .content:not(.pub-single__content) > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 3.4em;
+  line-height: 0.78;
+  padding: 0.04em 0.12em 0 0;
+  color: var(--color-accent);
+}
+
+
+/* -- Callouts & pull quotes (features.callouts) ----------------------------- */
+html.f-callouts .callout {
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 10px;
+  background: var(--color-bg-subtle);
+}
+
+html.f-callouts .callout__title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+}
+
+html.f-callouts .callout__body > :first-child { margin-top: 0; }
+html.f-callouts .callout__body > :last-child  { margin-bottom: 0; }
+
+html.f-callouts .callout--note    { border-left-color: var(--cat-research);      background: var(--cat-research-soft); }
+html.f-callouts .callout--note .callout__title    { color: var(--cat-research-text); }
+html.f-callouts .callout--tip     { border-left-color: var(--cat-visualization); background: var(--cat-visualization-soft); }
+html.f-callouts .callout--tip .callout__title     { color: var(--cat-visualization-text); }
+html.f-callouts .callout--warning { border-left-color: var(--cat-software);      background: var(--cat-software-soft); }
+html.f-callouts .callout--warning .callout__title { color: var(--cat-software-text); }
+
+html.f-callouts .pullquote {
+  margin: var(--space-12) 0;
+  padding: 0;
+}
+
+html.f-callouts .pullquote__text {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.3;
+  color: var(--color-text);
+  margin: 0;
+  padding-left: var(--space-6);
+  border-left: 3px solid var(--color-accent);
+}
+
+html.f-callouts .pullquote__cite {
+  margin-top: var(--space-3);
+  padding-left: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+
+/* -- Animated in-text link underline (features.linkUnderline) --------------- */
+html.f-underline .content a,
+html.f-underline .home-hero__bio a {
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--color-accent), var(--color-accent)),
+    linear-gradient(var(--color-border), var(--color-border));
+  background-size: 0% 2px, 100% 1px;
+  background-position: 0% 100%, 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 0.06em;
+  transition: background-size var(--duration-base) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+html.f-underline .content a:hover,
+html.f-underline .home-hero__bio a:hover {
+  background-size: 100% 2px, 100% 1px;
+}
+
+
+/* -- Visible keyboard focus ring (features.focusRing) ----------------------- */
+html.f-focus :focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+
+/* -- Sticky table of contents (features.toc) -------------------------------- */
+html.f-toc .prose-toc { display: none; }
+
+html.f-toc .prose-toc__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-3);
+}
+
+html.f-toc .prose-toc #TableOfContents ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html.f-toc .prose-toc #TableOfContents ul ul { padding-left: var(--space-3); }
+
+html.f-toc .prose-toc li { margin: 0 0 var(--space-1); }
+
+html.f-toc .prose-toc a {
+  display: block;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding: 0.15em 0 0.15em var(--space-3);
+  margin-left: -2px;
+  transition: color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+html.f-toc .prose-toc a:hover,
+html.f-toc .prose-toc a.is-current {
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+}
+
+@media (min-width: 60rem) {
+  html.f-toc .prose--has-toc {
+    max-width: var(--max-width-site);
+    display: grid;
+    grid-template-columns: minmax(0, var(--max-width-content)) 200px;
+    column-gap: var(--space-12);
+    justify-content: center;
+    align-items: start;
+  }
+
+  html.f-toc .prose--has-toc > *:not(.prose-toc) {
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  html.f-toc .prose--has-toc .prose-toc {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / 999;
+    position: sticky;
+    top: var(--space-8);
+    align-self: start;
+  }
+}
+
+
+/* -- Paper-grain texture (features.grain) ----------------------------------- */
+html.f-grain body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* -- Reduced motion (features.reducedMotion) -------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html.f-reduced-motion *,
+  html.f-reduced-motion *::before,
+  html.f-reduced-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* -- Print / PDF, tuned for the CV (features.printStyles) ------------------- */
+@media print {
+  html.f-print body { background: #fff; color: #000; }
+
+  html.f-print .site-header,
+  html.f-print .site-footer,
+  html.f-print .site-nav__toggle,
+  html.f-print .prose-toc,
+  html.f-print .back-link,
+  html.f-print .skip-link { display: none !important; }
+
+  html.f-print #main-content { padding: 0; }
+
+  html.f-print a {
+    color: #000;
+    text-decoration: none;
+    background: none;
+  }
+
+  html.f-print .pub-card,
+  html.f-print .project-card,
+  html.f-print .home-project-card,
+  html.f-print .cv-award {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+  }
+
+  html.f-print .cv-entry::before { background: #ccc; }
+  html.f-print .cv-entry::after  { background: #000; border-color: #fff; }
+  html.f-print .cv-entry__date,
+  html.f-print .cv-award__year,
+  html.f-print .cv-section__heading h2,
+  html.f-print .cv-icon { color: #000; }
+
+  html.f-print .cv-entry,
+  html.f-print .cv-award { break-inside: avoid; }
+  html.f-print h1, html.f-print h2, html.f-print h3 { break-after: avoid; }
+
+  @page { margin: 1.8cm; }
+}
+
+
+/* -- Dark mode — driven by the header toggle (features.darkMode) ------------
+   Light is the default; dark applies only when the reader flips the switch,
+   which sets data-theme="dark" on <html> (persisted in localStorage). */
+
+/* Header theme-toggle button */
+.site-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-theme-toggle:hover { color: var(--color-accent); }
+.site-theme-toggle svg { display: block; width: 20px; height: 20px; }
+
+/* Show the moon in light mode (click → dark), the sun in dark mode */
+.site-theme-toggle .icon-sun { display: none; }
+.site-theme-toggle .icon-moon { display: block; }
+html[data-theme="dark"] .site-theme-toggle .icon-moon { display: none; }
+html[data-theme="dark"] .site-theme-toggle .icon-sun { display: block; }
+
+/* Keep the logo left and group the toggle + nav on the right */
+.site-header__logo { margin-right: auto; }
+.site-header__inner { gap: var(--space-2) var(--space-5); }
+
+html.f-dark[data-theme="dark"] {
+  --color-bg:         #17150F;
+  --color-bg-subtle:  #211E16;
+  --color-text:       #ECE7DD;
+  --color-text-muted: #A59E8E;
+  --color-border:     #322E24;
+
+  --color-accent:       #D98463;
+  --color-accent-light: #3A2A1F;
+
+  --cat-software:           #D98463;
+  --cat-software-soft:      #3A271D;
+  --cat-software-text:      #E6A786;
+  --cat-visualization:      #8FB08F;
+  --cat-visualization-soft: #243024;
+  --cat-visualization-text: #A9C7A5;
+  --cat-research:           #7FA6C2;
+  --cat-research-soft:      #1F2B34;
+  --cat-research-text:      #A1C3D9;
+}
+
+/* Warm brown shadows disappear on a dark bg — deepen them */
+html.f-dark[data-theme="dark"] .pub-card:hover,
+html.f-dark[data-theme="dark"] .project-card:hover,
+html.f-dark[data-theme="dark"] .home-project-card:hover {
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.6);
+}
+
+html.f-dark[data-theme="dark"] .home-hero__photo-wrap {
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* The research cover ships on white; `multiply` would crush it on dark —
+   frame it on a light panel instead */
+html.f-dark[data-theme="dark"] .research-cover {
+  mix-blend-mode: normal;
+  background: #FAF8F5;
+  border-radius: 12px;
+  padding: var(--space-4);
+}

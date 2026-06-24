@@ -1,0 +1,15 @@
+{{- /* Publication resource links (pubBadges feature). Renders a compact row of
+       DOI / PDF / Code / Data links from front matter, only for fields that
+       are set. Context (.) is a publication page. */ -}}
+{{- $links := slice -}}
+{{- with .Params.doi }}{{ $links = $links | append (dict "label" "DOI" "url" (cond (hasPrefix . "http") . (printf "https://doi.org/%s" .))) }}{{ end -}}
+{{- with .Params.pdf }}{{ $links = $links | append (dict "label" "PDF" "url" .) }}{{ end -}}
+{{- with .Params.code }}{{ $links = $links | append (dict "label" "Code" "url" .) }}{{ end -}}
+{{- with .Params.data }}{{ $links = $links | append (dict "label" "Data" "url" .) }}{{ end -}}
+{{- with $links }}
+<ul class="pub-entry__links" role="list">
+  {{- range . }}
+  <li><a class="pub-link" href="{{ .url }}" rel="noopener" target="_blank">{{ .label }} ↗</a></li>
+  {{- end }}
+</ul>
+{{- end -}}

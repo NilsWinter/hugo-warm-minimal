@@ -1,0 +1,8 @@
+{{- /* Large pull quote. Usage:
+       {{< pullquote cite="A. Author" >}}
+       The quotable sentence.
+       {{< /pullquote >}}   */ -}}
+<figure class="pullquote">
+  <blockquote class="pullquote__text">{{ .Inner | markdownify }}</blockquote>
+  {{- with .Get "cite" }}<figcaption class="pullquote__cite">— {{ . }}</figcaption>{{ end }}
+</figure>
