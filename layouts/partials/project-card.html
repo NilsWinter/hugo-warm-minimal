@@ -15,9 +15,6 @@
     </div>
     <div class="project-card__header">
       <a class="project-card__title" href="{{ .Permalink }}">{{ .Title }}</a>
-      {{- with .Params.status }}
-      <span class="status-badge status-badge--{{ . }}">{{ . }}</span>
-      {{- end }}
     </div>
     <p class="project-card__desc">{{ .Params.description }}</p>
     {{- with .Params.tags }}
