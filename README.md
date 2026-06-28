@@ -26,6 +26,9 @@ Then run `hugo server`.
   `static/css/main.css` (`:root`). The accent ships as terracotta, with a sage
   alternative commented out.
 - **Fonts** are self-hosted variable woff2 files in `static/fonts/`.
+- **Header logo** — set `params.logo` to an image path (PNG or SVG) to replace the
+  site-title wordmark; it falls back to the title text when unset. Optionally set
+  `params.logoDark` to a light variant that is swapped in automatically in dark mode.
 
 ## Modular design features
 

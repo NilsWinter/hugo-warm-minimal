@@ -306,6 +306,31 @@ hr {
   color: var(--color-accent);
 }
 
+/* Image logo (params.logo). Sits inline with the wordmark fallback. */
+.site-header__logo:has(.site-header__logo-img) {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.site-header__logo-img {
+  display: block;
+  width: auto;
+  height: 56px;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.site-header__logo:hover .site-header__logo-img { opacity: 0.8; }
+
+/* Light/dark logo swap — only when a dark variant (params.logoDark) is set */
+.site-header__logo--dual .site-header__logo-img--dark { display: none; }
+html[data-theme="dark"] .site-header__logo--dual .site-header__logo-img--light { display: none; }
+html[data-theme="dark"] .site-header__logo--dual .site-header__logo-img--dark { display: block; }
+
+@media (max-width: 640px) {
+  .site-header__logo-img { height: 46px; }
+}
+
 /* Nav */
 .site-nav__list {
   display: flex;

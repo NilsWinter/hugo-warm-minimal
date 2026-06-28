@@ -1,7 +1,14 @@
 <header class="site-header" role="banner">
   <div class="site-header__inner">
-    <a class="site-header__logo" href="{{ "/" | relURL }}">
+    <a class="site-header__logo{{ if .Site.Params.logoDark }} site-header__logo--dual{{ end }}" href="{{ "/" | relURL }}"{{ if .Site.Params.logo }} aria-label="{{ .Site.Title }} — home"{{ end }}>
+      {{- with .Site.Params.logo }}
+      <img class="site-header__logo-img site-header__logo-img--light" src="{{ . | relURL }}" alt="{{ $.Site.Title }}" />
+      {{- with $.Site.Params.logoDark }}
+      <img class="site-header__logo-img site-header__logo-img--dark" src="{{ . | relURL }}" alt="" aria-hidden="true" />
+      {{- end }}
+      {{- else }}
       {{ .Site.Title }}
+      {{- end }}
     </a>
     {{- if .Site.Params.features.darkMode }}
     <button class="site-theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode" title="Toggle dark mode">
