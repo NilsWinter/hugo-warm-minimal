@@ -21,12 +21,23 @@
       {{- end }}
     </div>
 
+    {{- with .Params.authors }}
+    <p class="pub-single__authors">
+      {{- $n := len . -}}
+      {{- range $i, $a := first 25 . }}{{ if $i }}, {{ end }}{{ $a }}{{ end -}}
+      {{- if gt $n 25 }}, et al.{{ end -}}
+    </p>
+    {{- end }}
+
     {{- if .Site.Params.features.pubBadges }}{{ partial "pub-links.html" . }}{{ end }}
   </header>
 
+  {{- with .Content }}
   <div class="content pub-single__content">
-    {{ .Content }}
+    <p class="pub-abstract-label">Abstract</p>
+    {{ . }}
   </div>
+  {{- end }}
 
   <footer class="pub-single__footer">
     <a class="back-link" href="{{ "/publications/" | relURL }}">&larr; All publications</a>

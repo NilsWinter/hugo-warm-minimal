@@ -846,8 +846,25 @@ html[data-theme="dark"] .site-header__logo--dual .site-header__logo-img--dark { 
   font-size: var(--text-sm);
 }
 
+.pub-single__authors {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: var(--space-2) 0 0;
+}
+
 .pub-single__content {
   margin-top: var(--space-8);
+}
+
+.pub-abstract-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
 }
 
 .pub-single__footer {
