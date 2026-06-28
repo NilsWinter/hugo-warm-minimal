@@ -24,7 +24,7 @@
     {{- with .Params.authors }}
     <p class="pub-single__authors">
       {{- $n := len . -}}
-      {{- range $i, $a := first 25 . }}{{ if $i }}, {{ end }}{{ $a }}{{ end -}}
+      {{- range $i, $a := first 25 . }}{{ if $i }}, {{ end }}{{ partial "pub-author.html" (dict "name" $a "highlight" site.Params.highlightAuthor) }}{{ end -}}
       {{- if gt $n 25 }}, et al.{{ end -}}
     </p>
     {{- end }}

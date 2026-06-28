@@ -1,0 +1,15 @@
+{{- /* Renders one author name, wrapped in an accent span when it is the site
+       owner. Matches params.highlightAuthor: every whitespace-separated token
+       must appear in the name (case-insensitive), which avoids false hits on
+       other co-authors who share only a surname.
+       Call: {{ partial "pub-author.html" (dict "name" $name "highlight" site.Params.highlightAuthor) }} */ -}}
+{{- $name := .name -}}
+{{- $self := false -}}
+{{- with .highlight -}}
+  {{- $lname := lower $name -}}
+  {{- $self = true -}}
+  {{- range (split (lower .) " ") -}}
+    {{- if and . (not (in $lname .)) }}{{ $self = false }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $self -}}<span class="pub-author--self">{{ $name }}</span>{{- else -}}{{ $name }}{{- end -}}

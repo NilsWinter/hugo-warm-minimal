@@ -767,11 +767,45 @@ html[data-theme="dark"] .site-header__logo--dual .site-header__logo-img--dark { 
   font-size: var(--text-base);
   font-family: var(--font-body);
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
   letter-spacing: 0.05em;
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-2);
   border-bottom: 1px solid var(--color-border);
+}
+
+/* Anchor offset so jump-to-year lands clear of the sticky year nav */
+.pub-year-group { scroll-margin-top: 4rem; }
+
+/* Jump-to-year navigation (sticky) */
+.pub-year-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-8);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pub-year-nav a {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.pub-year-nav a:hover { color: var(--color-accent); }
+
+/* Own name, emphasized in author lists */
+.pub-author--self {
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .pub-list {
@@ -810,7 +844,7 @@ html[data-theme="dark"] .site-header__logo--dual .site-header__logo-img--dark { 
   display: block;
   font-size: var(--text-sm);
   font-style: italic;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
 }
 
 /* Tag chips — used on pub list and single */
