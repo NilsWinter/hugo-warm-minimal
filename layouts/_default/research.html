@@ -37,5 +37,18 @@
   </section>
   {{- end }}
 
+  {{/* ── Research projects ─────────────────────────────────────────────── */}}
+  {{- $projects := where .Site.RegularPages "Section" "projects" }}
+  {{- with $projects }}
+  <section class="research-projects" aria-labelledby="rp-heading">
+    <h2 class="section-heading" id="rp-heading">Research Projects</h2>
+    <ul class="project-grid" role="list">
+      {{- range .ByParam "weight" }}
+      {{ partial "project-card.html" . }}
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
 </div>
 {{ end }}
